@@ -1,0 +1,70 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0%;
+    padding: 0%;
+}
+
+.na1{
+    overflow: hidden ;
+    padding: 1%;
+    background-color: rgb(19, 18, 95);
+    width: 100%;
+    
+}
+
+a{
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    padding: 14px 16px;
+}
+a:hover{
+    background-color: dodgerblue;
+}
+
+.search{
+    float: right;
+    justify-content: center;
+    margin: 0%;
+    padding: 0%;
+}
+
+button{
+    background-color: rgb(19, 18, 95);
+    border: 2px solid green;
+    color:white;
+    cursor: pointer;
+}
+
+.lib{
+    margin: 2% 20% 1% 20% ;
+}
+
+.lib input[type="text"]{
+    margin-left: 10%;
+    width:80%;
+}
+.lib input[type="radio"]{
+    margin-left:19%;
+    text-align: center;
+}
+
+.tabl{
+    margin: 2% 20% 1% 20% ;
+}
+table{
+    border: 1px solid black;
+    width: 100%;
+    border-collapse: collapse;
+}
+th,td{
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even){
+    background-color: #dddddd;
+}
