@@ -1,3 +1,4 @@
+showitem();
 class book {
     constructor(name, bookname, type) {
         this.name = name;
@@ -18,17 +19,6 @@ class display {
         let formLibrary = document.getElementById("formLibrary");
         formLibrary.reset();
     }
-    add(book) {
-        let table = document.querySelector("tbody");
-        console.log(table);
-        let html = `<tr>
-                        <td>1</td>
-                        <td>${book.name}</td>
-                        <td>${book.bookname}</td>
-                        <td>${book.type}</td>
-                                `;
-        table.innerHTML += html;
-    }
     show(alertype, msg) {
         let message = document.getElementById("message");
         message.innerHTML = `<div class="alert alert-${alertype} alert-dismissible fade show" role="alert">
@@ -45,6 +35,14 @@ formLibrary.addEventListener("submit", addall);
 
 function addall(e) {
     e.preventDefault();
+    let objData;
+    let localData = localStorage.getItem("localData");
+    if (localData == null) {
+        objData = [];
+    }
+    else {
+        objData = JSON.parse(localData);
+    }
     let name = document.getElementById("name").value;
     let bookname = document.getElementById("author").value;
     let Fiction = document.getElementById("Fiction");
@@ -60,10 +58,12 @@ function addall(e) {
     else if (Cooking.checked) {
         type = Cooking.value
     }
-    let book = new book(name, bookname, type);
+    let book1 = new book(name, bookname, type);
+    objData.push(book1);
+    localStorage.setItem("localData", JSON.stringify(objData));
     let dis = new display;
-    if (dis.validate(book)) {
-        dis.add(book);
+    if (dis.validate(book1)) {
+        showitem();
         dis.clear();
         dis.show("success", "book is added!");
     }
@@ -71,3 +71,25 @@ function addall(e) {
         dis.show("danger", "Enter some real data");
     }
 }
+function showitem() {
+    let html = "";
+    let ObjData;
+    let table = document.querySelector("tbody");
+    let localData = localStorage.getItem("localData");
+    if (localData == null) {
+        objData = [];
+    }
+    else {
+        objData = JSON.parse(localData);
+    }
+    objData.forEach(function (element, index) {
+        html += `<tr>
+                        <td>${index}</td>
+                        <td>${element.name}</td>
+                        <td>${element.bookname}</td>
+                        <td>${element.type}</td>
+                            </tr>    `;
+    });
+    table.innerHTML += html;
+}
+
