@@ -68,3 +68,8 @@ th,td{
 tr:nth-child(even){
     background-color: #dddddd;
 }
+td > button{
+    /* background-color:white; */
+    border: none;
+    text-align: right;
+}

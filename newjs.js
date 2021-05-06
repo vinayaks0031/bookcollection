@@ -35,13 +35,13 @@ formLibrary.addEventListener("submit", addall);
 
 function addall(e) {
     e.preventDefault();
-    let objData;
+    let tableR;
     let localData = localStorage.getItem("localData");
     if (localData == null) {
-        objData = [];
+        tableR = [];
     }
     else {
-        objData = JSON.parse(localData);
+        tableR = JSON.parse(localData);
     }
     let name = document.getElementById("name").value;
     let bookname = document.getElementById("author").value;
@@ -59,8 +59,8 @@ function addall(e) {
         type = Cooking.value
     }
     let book1 = new book(name, bookname, type);
-    objData.push(book1);
-    localStorage.setItem("localData", JSON.stringify(objData));
+    tableR.push(book1);
+    localStorage.setItem("localData", JSON.stringify(tableR));
     let dis = new display;
     if (dis.validate(book1)) {
         showitem();
@@ -73,23 +73,38 @@ function addall(e) {
 }
 function showitem() {
     let html = "";
-    let ObjData;
+    let tableR;
     let table = document.querySelector("tbody");
     let localData = localStorage.getItem("localData");
     if (localData == null) {
-        objData = [];
+        tableR = [];
     }
     else {
-        objData = JSON.parse(localData);
+        tableR = JSON.parse(localData);
     }
-    objData.forEach(function (element, index) {
+    tableR.forEach(function (element, index) {
         html += `<tr>
-                        <td>${index}</td>
-                        <td>${element.name}</td>
-                        <td>${element.bookname}</td>
-                        <td>${element.type}</td>
-                            </tr>    `;
+        <td>${index}</td>
+        <td>${element.name}</td>
+        <td>${element.bookname}</td>
+        <td>${element.type} <button id="${index}" onclick="deletenote(this.id)" ><i class="fas fa-times-circle"></i></button> </td>
+
+    </tr>    `;
     });
-    table.innerHTML += html;
+    table.innerHTML = html;
 }
 
+function deletenote(i) {
+    console.log("yes deleted");
+    let tableR;
+    let localData = localStorage.getItem("localData");
+    if (localData == null) {
+        tableR = [];
+    }
+    else {
+        tableR = JSON.parse(localData);
+    }
+    tableR.splice(i, 1);
+    localStorage.setItem("localData", JSON.stringify(tableR));
+    showitem();
+}
